@@ -1,29 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Hammer, 
-  Shield, 
-  Ruler, 
-  Phone, 
-  Menu, 
-  X, 
-  CheckCircle, 
-  Users, 
-  Clock, 
-  ChevronDown, 
-  ChevronUp,
+import {
+  Shield,
+  Phone,
+  Menu,
+  X,
+  Clock,
+  ChevronDown,
   MapPin,
   HardHat,
   Home,
   ArrowRight,
-  User,
   Play,
   ChevronLeft,
   ChevronRight,
   Maximize2,
   ExternalLink,
-  Globe
+  Globe,
+  Ruler,
+  Hammer,
+  Users
 } from 'lucide-react';
-import { Metric, Service, HomeService, Project, FaqItem, Testimonial } from './types';
+import { Metric, Service, HomeService, Project, FaqItem, Testimonial } from '../types';
 
 /* --- CONSTANTS --- */
 const BRAND_LOGO_URL = '/logo.png'; // REPLACE THIS WITH YOUR PNG LOGO PATH
@@ -35,9 +32,9 @@ type Language = 'en' | 'gu';
 
 // A stylized Gada (Mace) icon representing Strength (Used for Section Headers)
 const GadaIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="currentColor" 
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
     className={className}
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -47,9 +44,9 @@ const GadaIcon: React.FC<{ className?: string }> = ({ className }) => (
 );
 
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="currentColor" 
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
     className={className}
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -76,7 +73,7 @@ const getInitials = (name: string) => {
 /* --- DATA CONSTANTS (ENGLISH) --- */
 
 const METRICS_EN: Metric[] = [
-  { id: 1, label: 'Years Experience', value: 25, suffix: '+' }, 
+  { id: 1, label: 'Years Experience', value: 25, suffix: '+' },
   { id: 2, label: 'Projects Completed', value: 850, suffix: '+' },
   { id: 3, label: 'Builder Partners', value: 40, suffix: '+' },
   { id: 4, label: 'Cities Served', value: 5, suffix: '' },
@@ -94,13 +91,13 @@ const BUILDER_SERVICES_EN: Service[] = [
     icon: <Hammer className="w-6 h-6" />
   },
   {
-    title: "Full Flat Fabrication", 
-    desc: "Comprehensive metal works for apartment interiors and exteriors, including safety doors, grills, and partitions.", 
+    title: "Full Flat Fabrication",
+    desc: "Comprehensive metal works for apartment interiors and exteriors, including safety doors, grills, and partitions.",
     icon: <Shield className="w-6 h-6" />
   },
   {
     title: "Site Fabrication",
-    desc: "On-site welding teams equipped with advanced tools and extensive safety gear for seamless assembly.", 
+    desc: "On-site welding teams equipped with advanced tools and extensive safety gear for seamless assembly.",
     icon: <HardHat className="w-6 h-6" />
   }
 ];
@@ -120,34 +117,32 @@ const FAQS_EN: FaqItem[] = [
 ];
 
 const TESTIMONIALS_EN: Testimonial[] = [
-  { 
-    name: "Ramesh Patel", 
-    role: "Contractor, Sunrise Builders", 
+  {
+    name: "Ramesh Patel",
+    role: "Contractor, Sunrise Builders",
     text: "BFW is the most reliable partner we've found. Their strength and timeline discipline is unmatched."
   },
-  { 
-    name: "Suresh Reddy", 
-    role: "Site Engineer", 
+  {
+    name: "Suresh Reddy",
+    role: "Site Engineer",
     text: "Quality of welding and finishing is superior. They passed our structural audit without a single remark."
   },
-  { 
-    name: "Namrata Mehta", 
-    role: "Home Owner", 
+  {
+    name: "Anjali Mehta",
+    role: "Home Owner",
     text: "Beautiful gate design and very strong build quality. Highly recommended."
   },
 ];
 
 const PROJECT_GALLERY_EN: Project[] = [
-  { 
-    id: 1, 
-    type: 'builder', 
-    category: 'Healthcare', 
-    title: 'BT Savani Hospital', 
+  {
+    id: 1,
+    type: 'builder',
+    category: 'Healthcare',
+    title: 'BT Savani Hospital',
     location: 'Rajkot',
-    thumbnail: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/other%20residence%20and%20industrial%20fabrication%20works/IMG-20240715-WA0034.jpg',
+    thumbnail: 'https://img.youtube.com/vi/IuK6misntww/0.jpg',
     media: [
-      { type: 'image', url: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/other%20residence%20and%20industrial%20fabrication%20works/IMG-20240715-WA0034.jpg', caption: 'Structural Framework' },
-      { type: 'image', url: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/other%20residence%20and%20industrial%20fabrication%20works/IMG-20240715-WA0035.jpg', caption: 'Heavy Duty Welding' },
       { type: 'video', url: 'https://youtube.com/shorts/IuK6misntww', thumbnail: 'https://img.youtube.com/vi/IuK6misntww/0.jpg', caption: 'Kidney Hospital Work 1' },
       { type: 'video', url: 'https://youtube.com/shorts/CXo6xsl41xw', thumbnail: 'https://img.youtube.com/vi/CXo6xsl41xw/0.jpg', caption: 'Kidney Hospital Work 2' }
     ]
@@ -166,11 +161,11 @@ const PROJECT_GALLERY_EN: Project[] = [
       { type: 'video', url: 'https://youtube.com/shorts/BMvXezLZbSI', thumbnail: 'https://img.youtube.com/vi/BMvXezLZbSI/0.jpg', caption: 'Lighthouse Project View' }
     ]
   },
-  { 
-    id: 2, 
-    type: 'home', 
-    category: 'Exterior', 
-    title: 'Farm House Elevation', 
+  {
+    id: 2,
+    type: 'home',
+    category: 'Exterior',
+    title: 'Farm House Elevation',
     location: 'Jamnagar Highway',
     thumbnail: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/farm%20house/IMG-20240715-WA0074.jpg',
     media: [
@@ -184,11 +179,11 @@ const PROJECT_GALLERY_EN: Project[] = [
       { type: 'image', url: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/farm%20house/IMG-20240715-WA0083.jpg', caption: 'Finishing Touches' }
     ]
   },
-  { 
-    id: 3, 
-    type: 'home', 
-    category: 'Decoration', 
-    title: 'Gazebo and Elevation Work', 
+  {
+    id: 3,
+    type: 'home',
+    category: 'Decoration',
+    title: 'Gazebo and Elevation Work',
     location: 'Kalavad Road',
     thumbnail: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/gajiba%20and%20elevation/IMG-20240715-WA0069.jpg',
     media: [
@@ -196,11 +191,11 @@ const PROJECT_GALLERY_EN: Project[] = [
       { type: 'image', url: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/gajiba%20and%20elevation/IMG-20240715-WA0070.jpg', caption: 'Elevation Framework' }
     ]
   },
-  { 
-    id: 4, 
-    type: 'home', 
-    category: 'Gates', 
-    title: 'Custom Metal Gates', 
+  {
+    id: 4,
+    type: 'home',
+    category: 'Gates',
+    title: 'Custom Metal Gates',
     location: 'Amin Marg',
     thumbnail: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/metal%20gate/IMG-20240715-WA0066.jpg',
     media: [
@@ -211,11 +206,11 @@ const PROJECT_GALLERY_EN: Project[] = [
       { type: 'video', url: 'https://youtube.com/shorts/lYG9EOUF2mM', thumbnail: 'https://img.youtube.com/vi/lYG9EOUF2mM/0.jpg', caption: 'Barricade Fabrication' }
     ]
   },
-  { 
-    id: 5, 
-    type: 'builder', 
-    category: 'Staircase', 
-    title: 'Metal Staircase Fabrication', 
+  {
+    id: 5,
+    type: 'builder',
+    category: 'Staircase',
+    title: 'Metal Staircase Fabrication',
     location: 'Industrial Area',
     thumbnail: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/metal%20stairs/Stairs.jpg',
     media: [
@@ -224,11 +219,11 @@ const PROJECT_GALLERY_EN: Project[] = [
       { type: 'image', url: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/metal%20stairs/Stairs3.jpg', caption: 'Safety Railings' }
     ]
   },
-  { 
-    id: 6, 
-    type: 'builder', 
-    category: 'Industrial', 
-    title: 'MS Flooring', 
+  {
+    id: 6,
+    type: 'builder',
+    category: 'Industrial',
+    title: 'MS Flooring',
     location: 'Metoda GIDC',
     thumbnail: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/ms%20floor/IMG-20240715-WA0015.jpg',
     media: [
@@ -244,7 +239,7 @@ const PROJECT_GALLERY_EN: Project[] = [
     id: 7,
     type: 'home',
     category: 'Roofing',
-    title: 'Outdoor Safety Roofing', 
+    title: 'Outdoor Safety Roofing',
     location: 'University Road',
     thumbnail: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/roof%20and%20shades/IMG-20240715-WA0053.jpg',
     media: [
@@ -296,6 +291,8 @@ const PROJECT_GALLERY_EN: Project[] = [
     location: 'Lodhika GIDC',
     thumbnail: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/other%20residence%20and%20industrial%20fabrication%20works/IMG-20240715-WA0036.jpg',
     media: [
+      { type: 'image', url: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/other%20residence%20and%20industrial%20fabrication%20works/IMG-20240715-WA0034.jpg', caption: 'Structural Framework' },
+      { type: 'image', url: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/other%20residence%20and%20industrial%20fabrication%20works/IMG-20240715-WA0035.jpg', caption: 'Heavy Duty Welding' },
       { type: 'image', url: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/other%20residence%20and%20industrial%20fabrication%20works/IMG-20240715-WA0036.jpg', caption: 'Heavy Columns' },
       { type: 'image', url: 'https://raw.githubusercontent.com/Cybertron728/fabrication/main/images/other%20residence%20and%20industrial%20fabrication%20works/IMG-20240715-WA0037.jpg', caption: 'Truss Assembly' }
     ]
@@ -316,7 +313,7 @@ const PROJECT_GALLERY_EN: Project[] = [
 /* --- DATA CONSTANTS (GUJARATI) --- */
 
 const METRICS_GU: Metric[] = [
-  { id: 1, label: 'વર્ષોનો અનુભવ', value: 25, suffix: '+' }, 
+  { id: 1, label: 'વર્ષોનો અનુભવ', value: 25, suffix: '+' },
   { id: 2, label: 'પ્રોજેક્ટ્સ પૂર્ણ', value: 850, suffix: '+' },
   { id: 3, label: 'બિલ્ડર પાર્ટનર્સ', value: 40, suffix: '+' },
   { id: 4, label: 'શહેરોમાં સેવા', value: 5, suffix: '' },
@@ -334,13 +331,13 @@ const BUILDER_SERVICES_GU: Service[] = [
     icon: <Hammer className="w-6 h-6" />
   },
   {
-    title: "ફ્લેટ ફેબ્રિકેશન", 
-    desc: "એપાર્ટમેન્ટ ઈન્ટીરીયર અને એક્સટીરીયર માટે મેટલ કામ, જેમાં સેફ્ટી ડોર, ગ્રિલ અને પાર્ટીશન શામેલ છે.", 
+    title: "ફ્લેટ ફેબ્રિકેશન",
+    desc: "એપાર્ટમેન્ટ ઈન્ટીરીયર અને એક્સટીરીયર માટે મેટલ કામ, જેમાં સેફ્ટી ડોર, ગ્રિલ અને પાર્ટીશન શામેલ છે.",
     icon: <Shield className="w-6 h-6" />
   },
   {
     title: "સાઇટ ફેબ્રિકેશન",
-    desc: "સીમલેસ એસેમ્બલી માટે આધુનિક સાધનો અને સુરક્ષા ગિયર સાથે ઓન-સાઇટ વેલ્ડિંગ ટીમ.", 
+    desc: "સીમલેસ એસેમ્બલી માટે આધુનિક સાધનો અને સુરક્ષા ગિયર સાથે ઓન-સાઇટ વેલ્ડિંગ ટીમ.",
     icon: <HardHat className="w-6 h-6" />
   }
 ];
@@ -360,25 +357,46 @@ const FAQS_GU: FaqItem[] = [
 ];
 
 const TESTIMONIALS_GU: Testimonial[] = [
-  { 
-    name: "રમેશ પટેલ", 
-    role: "કોન્ટ્રાક્ટર, સનરાઈઝ બિલ્ડર્સ", 
+  {
+    name: "રમેશ પટેલ",
+    role: "કોન્ટ્રાક્ટર, સનરાઈઝ બિલ્ડર્સ",
     text: "BFW સૌથી ભરોસાપાત્ર પાર્ટનર છે. તેમની મજબૂતી અને સમયપાલન અજોડ છે."
   },
-  { 
-    name: "સુરેશ રેડ્ડી", 
-    role: "સાઇટ એન્જિનિયર", 
+  {
+    name: "સુરેશ રેડ્ડી",
+    role: "સાઇટ એન્જિનિયર",
     text: "વેલ્ડિંગ અને ફિનિશિંગની ગુણવત્તા શ્રેષ્ઠ છે. તેમણે સ્ટ્રક્ચરલ ઓડિટમાં એક પણ રીમાર્ક વિના પાસ કર્યું."
   },
-  { 
-    name: "અંજલિ મહેતા", 
-    role: "ઘર માલિક", 
+  {
+    name: "અંજલિ મહેતા",
+    role: "ઘર માલિક",
     text: "સુંદર ગેટ ડિઝાઇન અને ખૂબ મજબૂત બિલ્ડ ક્વોલિટી. ખૂબ આગ્રહણીય."
   },
 ];
 
 const PROJECT_GALLERY_GU: Project[] = PROJECT_GALLERY_EN.map(p => {
-  if (p.id === 2) return { ...p, title: 'Farm House Elevation' };
+  const guTitles: Record<number, { title: string, category: string }> = {
+    1: { title: 'બી.ટી. સવાણી હોસ્પિટલ', category: 'હેલ્થકેર' },
+    12: { title: "માલાણી પ્રોજેક્ટ", category: 'સ્પેશિયાલિટી' },
+    2: { title: 'ફાર્મ હાઉસ એલિવેશન', category: 'એક્સટીરીયર' },
+    3: { title: 'ગઝેબો અને એલિવેશન', category: 'ડેકોરેશન' },
+    4: { title: 'મેટલ ગેટ્સ (કસ્ટમ)', category: 'ગેટ્સ' },
+    5: { title: 'મેટલ સીડી ફેબ્રિકેશન', category: 'સીડી' },
+    6: { title: 'એમ.એસ. ફ્લોરિંગ', category: 'ઈન્ડસ્ટ્રિયલ' },
+    7: { title: 'સેફ્ટી રૂફિંગ', category: 'રૂફિંગ' },
+    8: { title: 'ઈન્ડસ્ટ્રિયલ રૂફિંગ', category: 'રૂફિંગ' },
+    9: { title: 'સોલર રૂફિંગ સોલ્યુશન્સ', category: 'સોલર' },
+    10: { title: 'હેવી ફેબ્રિકેશન', category: 'ઈન્ડસ્ટ્રિયલ' },
+    11: { title: 'રેસિડેન્શિયલ પ્રોજેક્ટ', category: 'રેસિડેન્શિયલ' }
+  };
+
+  if (guTitles[p.id]) {
+    return {
+      ...p,
+      title: guTitles[p.id].title,
+      category: guTitles[p.id].category
+    };
+  }
   return p;
 });
 
@@ -422,10 +440,10 @@ const STATIC_TEXT = {
       desc: "Delivering strength and precision in metal fabrication since 1998. Your trusted partner for heavy structural and decorative metal works.",
       contact_title: "Contact Us",
       address_title: "Workshop Address",
-      address: <>Street no.14 Nilkanth Park,<br/>Pushkardham Main Road, Opp. Govt. Vegetable Market,<br/>Rajkot - 360005</>,
+      address: <>Street no.14 Nilkanth Park,<br />Pushkardham Main Road,<br />Opp. Govt. Vegetable Market,<br />Rajkot - 360005</>,
       call_label: "Call Us (9 AM - 8 PM)",
       working_label: "Working Hours",
-      working_days: <>Mon, Tue, Thu - Sat:<br/>9:00 AM - 8:00 PM</>,
+      working_days: <>Mon, Tue, Thu - Sat:<br />9:00 AM - 8:00 PM</>,
       closed_day: "Wed: Closed",
       links_title: "Quick Links",
       links: ['Home', 'Services', 'Portfolio', 'Testimonials', 'Contact'],
@@ -441,39 +459,39 @@ const STATIC_TEXT = {
       quote: "ભાવ જાણો"
     },
     hero: {
-      since: "1998 થી કાર્યરત", 
+      since: "1998 થી કાર્યરત",
       title: "મજબૂતીનું સર્જન.\nવિશ્વાસનું બંધન.",
-      desc: "રાજકોટમાં બિલ્ડરો અને પ્રીમિયમ ઘરો માટે શ્રેષ્ઠ ફેબ્રિકેશન કામ. અમે લોખંડને કલાત્મક અને મજબૂત આકાર આપીએ છીએ.", 
+      desc: "રાજકોટમાં બિલ્ડરો અને પ્રીમિયમ ઘરો માટે શ્રેષ્ઠ ફેબ્રિકેશન કામ. અમે લોખંડને કલાત્મક અને મજબૂત આકાર આપીએ છીએ.",
       btn_visit: "સાઇટ વિઝિટ બુક કરો",
       btn_projects: "અમારા પ્રોજેક્ટ્સ જુઓ"
     },
     sections: {
       expertise_title: "અમારી નિપુણતા",
-      expertise_sub: "અમારી સેવાઓ", 
+      expertise_sub: "અમારી સેવાઓ",
       builders_title: "બિલ્ડરો માટે",
-      builders_sub: "ઈન્ડસ્ટ્રિયલ અને કોમર્શિયલ", 
-      home_title: "ઘર માટે", 
+      builders_sub: "ઈન્ડસ્ટ્રિયલ અને કોમર્શિયલ",
+      home_title: "ઘર માટે",
       home_sub: "રેસિડેન્શિયલ અને ડેકોર",
-      custom_title: "તમારી વિશેષ પસંદગી?", 
-      custom_desc: "અમે તમારી કલ્પના મુજબનું અજોડ ફેબ્રિકેશન કરી આપીએ છીએ.", 
+      custom_title: "તમારી વિશેષ પસંદગી?",
+      custom_desc: "અમે તમારી કલ્પના મુજબનું અજોડ ફેબ્રિકેશન કરી આપીએ છીએ.",
       custom_btn: "સંપર્ક કરો",
-      projects_title: "અમારા પ્રોજેક્ટ્સ", 
+      projects_title: "અમારા પ્રોજેક્ટ્સ",
       projects_sub: "અમારું કામ",
       watch_youtube: "YouTube પર જુઓ",
-      testimonials_title: "ગ્રાહકોનો અનુભવ", 
+      testimonials_title: "ગ્રાહકોનો અનુભવ",
       testimonials_sub: "ટેસ્ટિમોનિયલ્સ",
       faq_title: "સામાન્ય પ્રશ્નો",
       faq_sub: "FAQ"
     },
     footer: {
-      desc: "1998 થી ફેબ્રિકેશન ક્ષેત્રે અગ્રેસર. હેવી સ્ટ્રક્ચરલ અને ડેકોરેટિવ કામ માટે રાજકોટનું સૌથી વિશ્વાસપાત્ર નામ (BFW).", 
+      desc: "1998 થી ફેબ્રિકેશન ક્ષેત્રે અગ્રેસર. હેવી સ્ટ્રક્ચરલ અને ડેકોરેટિવ કામ માટે રાજકોટનું સૌથી વિશ્વાસપાત્ર નામ (BFW).",
       contact_title: "સંપર્ક",
       address_title: "વર્કશોપનું સરનામું",
-      address: <>શેરી નં. ૧૪, નીલકંઠ પાર્ક,<br/>પુષ્કરધામ મેઈન રોડ, સરકારી શાકભાજી માર્કેટ સામે,<br/>રાજકોટ - ૩૬૦૦૦૫</>,
+      address: <>શેરી નં. ૧૪, નીલકંઠ પાર્ક,<br />પુષ્કરધામ મેઈન રોડ,<br />સરકારી શાકભાજી માર્કેટ સામે,<br />રાજકોટ - ૩૬૦૦૦૫</>,
       call_label: "ફોન કરો (9 AM - 8 PM)",
       working_label: "સમય",
-      working_days: <>સોમ, મંગળ, ગુરુ - શનિ:<br/>9:00 AM - 8:00 PM</>,
-      closed_day: "બુધવારે રજા રહેશે", 
+      working_days: <>સોમ, મંગળ, ગુરુ - શનિ:<br />9:00 AM - 8:00 PM</>,
+      closed_day: "બુધવારે રજા રહેશે",
       links_title: "ક્વિક લિંક્સ",
       links: ['હોમ', 'સેવાઓ', 'પ્રોજેક્ટ્સ', 'ગ્રાહકોનો અનુભવ', 'સંપર્ક'],
       copyright: "BFW (બી.એફ.ડબલ્યુ.) ફેબ્રિકેશન. સર્વાધિકાર સુરક્ષિત."
@@ -492,7 +510,7 @@ interface AnimatedMetricProps {
 
 const AnimatedMetric: React.FC<AnimatedMetricProps> = ({ value, label, suffix, inView }) => {
   const [currentValue, setCurrentValue] = useState(0);
-  
+
   useEffect(() => {
     if (!inView) return;
 
@@ -504,9 +522,9 @@ const AnimatedMetric: React.FC<AnimatedMetricProps> = ({ value, label, suffix, i
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min((timestamp - startTimestamp) / duration, 1);
       const easeProgress = 1 - Math.pow(1 - progress, 3);
-      
+
       setCurrentValue(Math.floor(easeProgress * value));
-      
+
       if (progress < 1) {
         animationId = window.requestAnimationFrame(step);
       } else {
@@ -514,9 +532,9 @@ const AnimatedMetric: React.FC<AnimatedMetricProps> = ({ value, label, suffix, i
         setCurrentValue(value);
       }
     };
-    
+
     animationId = window.requestAnimationFrame(step);
-    
+
     return () => {
       window.cancelAnimationFrame(animationId);
     };
@@ -564,125 +582,346 @@ interface ProjectModalProps {
   t: any; // Translation object for modal specific text
 }
 
+interface TypingTestimonialProps {
+  testimonial: Testimonial;
+  inView: boolean;
+  index: number;
+}
+
+const TypingTestimonial: React.FC<TypingTestimonialProps> = ({ testimonial, inView, index }) => {
+  const [displayedText, setDisplayedText] = useState("");
+  const fullText = testimonial.text;
+
+  useEffect(() => {
+    if (!inView) {
+      setDisplayedText("");
+      return;
+    }
+
+    // Stagger start based on index (500ms between cards)
+    const startTimeout = setTimeout(() => {
+      let currentIdx = 0;
+      // Faster typing for positive "review" feel
+      const interval = setInterval(() => {
+        if (currentIdx < fullText.length) {
+          setDisplayedText(fullText.substring(0, currentIdx + 1));
+          currentIdx++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 25);
+
+      return () => clearInterval(interval);
+    }, index * 400);
+
+    return () => clearTimeout(startTimeout);
+  }, [inView, fullText, index]);
+
+  return (
+    <div className="bg-white p-8 rounded-2xl shadow-sm border border-orange-100 flex flex-col hover:shadow-xl hover:border-orange-200 transition-all duration-300 group">
+      <div className="mb-6 text-orange-500 flex gap-1">
+        {[1, 2, 3, 4, 5].map(star => (
+          <span key={star} className="text-xl group-hover:scale-110 transition-transform" style={{ transitionDelay: `${star * 50}ms` }}>★</span>
+        ))}
+      </div>
+      <div className="relative mb-6 flex-grow">
+        <p className="text-slate-700 italic leading-relaxed min-h-[80px]">
+          "{displayedText}"
+          {inView && displayedText.length < fullText.length && (
+            <span className="w-1.5 h-4 bg-orange-500 inline-block ml-1 animate-pulse"></span>
+          )}
+        </p>
+      </div>
+      <div className="flex items-center gap-4 border-t border-slate-100 pt-4 mt-auto">
+        <div className={`w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border border-slate-100 shadow-sm text-sm font-black transition-transform group-hover:scale-110 ${['bg-orange-100 text-orange-700', 'bg-blue-100 text-blue-700', 'bg-green-100 text-green-700'][index % 3]}`}>
+          {testimonial.name.split(' ').map((n: string) => n[0]).join('')}
+        </div>
+        <div>
+          <h5 className="font-bold text-slate-900">{testimonial.name}</h5>
+          <p className="text-xs text-slate-500 uppercase font-medium tracking-wider">{testimonial.role}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, t }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [showControls, setShowControls] = useState(true);
+
   const currentMedia = project.media[currentIndex];
 
-  const nextMedia = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  // Reset loading state when index changes
+  useEffect(() => {
+    setIsLoading(true);
+  }, [currentIndex]);
+
+  // Keyboard Navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') nextMedia();
+      if (e.key === 'ArrowLeft') prevMedia();
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentIndex]);
+
+  const nextMedia = () => {
     setCurrentIndex((prev) => (prev + 1) % project.media.length);
   };
 
-  const prevMedia = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const prevMedia = () => {
     setCurrentIndex((prev) => (prev - 1 + project.media.length) % project.media.length);
+  };
+
+  // Touch Handlers
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (touchStart === null || touchEnd === null) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) nextMedia();
+    if (isRightSwipe) prevMedia();
   };
 
   const youTubeId = currentMedia.type === 'video' ? getYouTubeId(currentMedia.url) : null;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4" onClick={onClose}>
-      
-      {/* Close Button */}
-      <button 
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 backdrop-blur-xl animate-fadeIn"
+      onClick={onClose}
+    >
+
+      {/* Close Button - Premium Glass Style */}
+      <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-white hover:text-orange-500 transition-colors z-[70] p-2 bg-black/50 rounded-full"
+        className="absolute top-6 right-6 z-[80] group flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/10 backdrop-blur-md hover:bg-white/20 hover:scale-105 hover:rotate-90 transition-all duration-300"
       >
-        <X size={32} />
+        <X size={24} className="text-white/80 group-hover:text-white" />
       </button>
 
       {/* Main Content Container */}
-      <div className="relative w-full max-w-6xl max-h-[90vh] flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
-        
-        {/* Media Viewer */}
-        <div className="relative w-full flex items-center justify-center bg-black rounded-lg overflow-hidden" style={{ aspectRatio: '16/9' }}>
-          {currentMedia.type === 'video' && youTubeId ? (
-            <iframe
-              src={`https://www.youtube.com/embed/${youTubeId}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`}
-              title="YouTube video player"
-              className="w-full h-full border-0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          ) : currentMedia.type === 'video' ? (
-            <video 
-              src={currentMedia.url} 
-              controls 
-              autoPlay 
-              className="w-full h-full object-contain"
-              poster={currentMedia.thumbnail}
-            />
-          ) : (
-            <img 
-              src={currentMedia.url} 
-              alt={project.title} 
-              className="w-full h-full object-contain"
-            />
+      <div
+        className="relative w-full h-full md:max-w-7xl md:h-[90vh] flex flex-col bg-black/20 animate-scaleIn"
+        onClick={(e) => e.stopPropagation()}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        onMouseEnter={() => setShowControls(true)}
+        onMouseLeave={() => setShowControls(false)}
+      >
+
+
+        {/* Media Viewer Area */}
+        <div className="relative w-full flex-grow flex items-center justify-center overflow-hidden">
+
+          {/* Blurred Background - Shows current media blurred behind */}
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              backgroundImage: `url(${currentMedia.thumbnail || currentMedia.url})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              filter: 'blur(40px) brightness(0.3)',
+              transform: 'scale(1.2)',
+            }}
+          />
+
+          {/* Gradient overlay for better contrast */}
+          <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+
+          {/* Loader */}
+          {isLoading && currentMedia.type === 'image' && (
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <div className="relative w-20 h-20 md:w-24 md:h-24 flex items-center justify-center">
+                {/* Rotating outer circle */}
+                <div className="absolute inset-0 border-2 md:border-4 border-orange-500/20 rounded-full"></div>
+                <div className="absolute inset-0 border-2 md:border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+
+                {/* Branding text */}
+                <div className="flex flex-col items-center justify-center leading-none">
+                  <span className="text-white font-black text-lg md:text-xl tracking-tighter">BFW</span>
+                  <div className="h-[1px] w-4 bg-orange-500 my-0.5"></div>
+                  <span className="text-[8px] text-orange-400 font-bold uppercase tracking-widest">Balaji</span>
+                </div>
+              </div>
+            </div>
           )}
 
-          {/* Navigation Arrows (Only if multiple items) */}
+          {/* Media Frame Container */}
+          <div className="relative z-[5] p-2 md:p-4 w-full max-w-[95%] md:max-w-[85%] flex flex-col gap-3">
+
+            {/* Elegant Header Above Media */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-2 px-1">
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-2">
+                  <h2 className="text-xl md:text-2xl font-black text-white tracking-tight leading-none">{project.title}</h2>
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-orange-600/20 border border-orange-500/30 text-orange-400">
+                    {project.category}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 text-xs md:text-sm text-white/60 font-medium">
+                  <div className="flex items-center gap-1">
+                    <MapPin size={12} className="text-orange-500" />
+                    <span>{project.location}</span>
+                  </div>
+                  {currentMedia.type === 'video' && (
+                    <>
+                      <span className="text-white/20">•</span>
+                      <a
+                        href={currentMedia.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
+                      >
+                        <span className="underline underline-offset-4">{t.watch_youtube}</span>
+                        <ExternalLink size={10} />
+                      </a>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* Step Counter Badge */}
+              {project.media.length > 1 && (
+                <div className="self-start md:self-auto px-3 py-1 bg-white/5 border border-white/10 backdrop-blur-md rounded-full text-[11px] font-black text-white/80 tracking-widest uppercase">
+                  {currentIndex + 1} <span className="text-white/20 mx-1">/</span> {project.media.length}
+                </div>
+              )}
+            </div>
+
+            {/* Outer Frame - Glass Border */}
+            <div className="relative rounded-xl md:rounded-2xl bg-gradient-to-br from-white/20 via-white/5 to-white/10 p-[2px] md:p-[3px] shadow-2xl overflow-hidden">
+              {/* Inner Frame - Improved to prevent black bars for portrait photos */}
+              <div className="relative rounded-[10px] md:rounded-xl overflow-hidden bg-black/20 backdrop-blur-xl">
+                {currentMedia.type === 'video' && youTubeId ? (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${youTubeId}?autoplay=1&mute=0&playsinline=1&rel=0&modestbranding=1`}
+                    title="YouTube video player"
+                    className="w-full aspect-video border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    onLoad={() => setIsLoading(false)}
+                  />
+                ) : currentMedia.type === 'video' ? (
+                  <video
+                    src={currentMedia.url}
+                    controls
+                    autoPlay
+                    className="w-full max-h-[60vh] object-contain"
+                    poster={currentMedia.thumbnail}
+                    onLoadedData={() => setIsLoading(false)}
+                  />
+                ) : (
+                  <img
+                    src={currentMedia.url}
+                    alt={project.title}
+                    className={`w-full max-h-[50vh] md:max-h-[60vh] object-contain transition-all duration-500 ${isLoading ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}
+                    onLoad={() => setIsLoading(false)}
+                  />
+                )}
+              </div>
+
+              {/* Glow Effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-orange-500/10 via-transparent to-orange-500/10 rounded-2xl blur-xl -z-10 opacity-30" />
+            </div>
+
+            {/* Optional Caption inside Frame Container but below Media */}
+            {currentMedia.caption && (
+              <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-lg px-4 py-2 mt-1">
+                <p className="text-slate-300 text-xs md:text-sm font-light italic text-center">
+                  {currentMedia.caption}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Navigation Arrows - Premium Persistent Style */}
           {project.media.length > 1 && (
             <>
-              <button 
-                onClick={prevMedia}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-orange-600 transition-colors z-[70]"
+              <button
+                onClick={(e) => { e.stopPropagation(); prevMedia(); }}
+                className={`flex absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 items-center justify-center rounded-full bg-white/10 border border-white/10 backdrop-blur-xl text-white hover:bg-orange-600 hover:border-orange-500 hover:scale-110 active:scale-90 transition-all duration-300 z-[70] ${showControls ? 'opacity-100' : 'opacity-40'}`}
               >
-                <ChevronLeft size={24} />
+                <ChevronLeft size={24} className="md:w-8 md:h-8" />
               </button>
-              <button 
-                onClick={nextMedia}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-orange-600 transition-colors z-[70]"
+              <button
+                onClick={(e) => { e.stopPropagation(); nextMedia(); }}
+                className={`flex absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 items-center justify-center rounded-full bg-white/10 border border-white/10 backdrop-blur-xl text-white hover:bg-orange-600 hover:border-orange-500 hover:scale-110 active:scale-90 transition-all duration-300 z-[70] ${showControls ? 'opacity-100' : 'opacity-40'}`}
               >
-                <ChevronRight size={24} />
+                <ChevronRight size={24} className="md:w-8 md:h-8" />
               </button>
             </>
           )}
-        </div>
 
-        {/* Info & Thumbnails Bar */}
-        <div className="w-full mt-4 flex flex-col md:flex-row justify-between items-start text-white gap-4">
-          <div>
-            <h3 className="text-2xl font-bold">{project.title}</h3>
-            <div className="flex flex-wrap gap-2 items-center">
-                <p className="text-orange-400 text-sm uppercase tracking-wide">{project.location} • {project.category}</p>
-                {currentMedia.type === 'video' && (
-                    <a 
-                        href={currentMedia.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-white text-xs flex items-center gap-1 border border-slate-600 rounded px-2 py-0.5 transition-colors"
-                    >
-                        <span>{t.watch_youtube}</span>
-                        <ExternalLink size={10} />
-                    </a>
-                )}
-            </div>
-            {currentMedia.caption && <p className="text-slate-400 text-sm mt-1 italic">{currentMedia.caption}</p>}
-          </div>
-          
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-mono text-slate-500">{currentIndex + 1} / {project.media.length}</span>
-          </div>
-        </div>
-
-        {/* Thumbnails Scroller (if > 1) */}
-        {project.media.length > 1 && (
-          <div className="w-full mt-4 flex gap-2 overflow-x-auto pb-2 scrollbar-hide justify-center">
-            {project.media.map((item, idx) => (
-              <button 
-                key={idx} 
-                onClick={() => setCurrentIndex(idx)}
-                className={`flex-shrink-0 w-20 h-16 rounded overflow-hidden border-2 transition-all ${idx === currentIndex ? 'border-orange-500 opacity-100' : 'border-transparent opacity-50 hover:opacity-100'}`}
-              >
-                <img 
-                  src={item.thumbnail || item.url} 
-                  alt="thumb" 
-                  className="w-full h-full object-cover"
+          {/* Mobile Swipe Hints */}
+          {project.media.length > 1 && (
+            <div className="md:hidden absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 pointer-events-none opacity-60 z-10">
+              {project.media.map((_item: any, i: number) => (
+                <div
+                  key={i}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'w-6 bg-white' : 'w-1.5 bg-white/40'}`}
                 />
-              </button>
-            ))}
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className={`
+            w-full transition-all duration-300
+            bg-gradient-to-t from-black via-black/90 to-transparent pt-8 p-6 md:pt-4 md:bg-neutral-900/50 md:backdrop-blur-xl md:border-t md:border-white/5
+            flex flex-col gap-4
+            absolute bottom-0 md:static z-[65]
+        `}>
+          <div className="flex flex-col md:flex-row justify-center items-center text-white gap-4 max-w-7xl mx-auto w-full">
+            {/* Thumbnails Scroller */}
+            {project.media.length > 1 && (
+              <div className="w-full md:w-auto overflow-x-auto pb-1 scrollbar-none">
+                <div className="flex gap-2 justify-center">
+                  {project.media.map((item, idx) => (
+                    <button
+                      key={idx}
+                      onClick={(e) => { e.stopPropagation(); setCurrentIndex(idx); }}
+                      className={`
+                        relative flex-shrink-0 w-16 h-12 md:w-24 md:h-16 rounded-lg overflow-hidden transition-all duration-300 group
+                        ${idx === currentIndex
+                          ? 'ring-2 ring-orange-500 ring-offset-2 ring-offset-black scale-105 opacity-100 grayscale-0'
+                          : 'opacity-50 grayscale hover:opacity-100 hover:grayscale-0 scale-100'}
+                    `}
+                    >
+                      <img
+                        src={item.thumbnail || item.url}
+                        alt="thumb"
+                        className="w-full h-full object-cover"
+                      />
+                      {item.type === 'video' && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-transparent transition-colors">
+                          <Play size={16} className="text-white fill-white" />
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
@@ -693,8 +932,11 @@ const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [statsInView, setStatsInView] = useState(false);
-  
+  const [testimonialsInView, setTestimonialsInView] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const statsRef = useRef<HTMLDivElement>(null);
+  const testimonialsRef = useRef<HTMLDivElement>(null);
 
   // Derived content based on language
   const t = STATIC_TEXT[language];
@@ -711,23 +953,32 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const statsObserver = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setStatsInView(true);
-        }
+        if (entry.isIntersecting) setStatsInView(true);
       },
       { threshold: 0.1 }
     );
 
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
-    }
+    const testimonialsObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setTestimonialsInView(true);
+      },
+      { threshold: 0.1 }
+    );
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    if (statsRef.current) statsObserver.observe(statsRef.current);
+    if (testimonialsRef.current) testimonialsObserver.observe(testimonialsRef.current);
 
     return () => {
-      if (statsRef.current) {
-        observer.unobserve(statsRef.current);
-      }
+      window.removeEventListener('scroll', handleScroll);
+      if (statsRef.current) statsObserver.unobserve(statsRef.current);
+      if (testimonialsRef.current) testimonialsObserver.unobserve(testimonialsRef.current);
     };
   }, []);
 
@@ -744,444 +995,437 @@ const App: React.FC = () => {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
         <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
-            {/* Logo area - LINE 425 */}
-             <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-                <img 
-  src={BRAND_LOGO_URL} 
-  alt="BFW Logo" 
-  className="h-14 md:h-16 w-auto object-contain" 
-  onError={(e) => {
-    e.currentTarget.style.display = 'none';
-    const fallback = e.currentTarget.parentElement?.querySelector('.fallback-logo');
-    if (fallback) fallback.classList.remove('hidden');
-  }}
-/>
+          {/* Logo area - LINE 425 */}
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <img
+              src={BRAND_LOGO_URL}
+              alt="BFW Logo"
+              className="h-14 md:h-16 w-auto object-contain"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                const fallback = e.currentTarget.parentElement?.querySelector('.fallback-logo');
+                if (fallback) fallback.classList.remove('hidden');
+              }}
+            />
 
-                {/* Fallback Branding if image is missing */}
-                <div className="fallback-logo hidden flex items-center gap-2">
-                   <div className="bg-orange-600 text-white p-2 rounded-lg">
-                      <GadaIcon className="w-6 h-6" />
-                   </div>
-                   <div className="flex flex-col leading-none">
-                      <span className="text-2xl font-black tracking-tighter text-slate-900">BFW</span>
-                      <span className="text-sm font-bold text-orange-600 tracking-wider uppercase">Fabrication</span>
-                   </div>
-                </div>
-             </div>
-
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-8">
-                {['services', 'portfolio', 'testimonials', 'contact'].map((key) => (
-                    <button 
-                        key={key}
-                        onClick={() => scrollToSection(key)}
-                        className="text-sm font-bold uppercase tracking-wide text-slate-600 hover:text-orange-600 transition-colors"
-                    >
-                        {t.nav[key as keyof typeof t.nav]}
-                    </button>
-                ))}
-                
-                {/* Language Switcher */}
-                <button 
-                    onClick={toggleLanguage}
-                    className="flex items-center gap-1 text-slate-600 hover:text-orange-600 transition-colors font-semibold"
-                >
-                    <Globe size={18} />
-                    <span>{language === 'en' ? 'GU' : 'EN'}</span>
-                </button>
-
-                <button 
-                    onClick={() => scrollToSection('contact')}
-                    className="bg-orange-600 text-white px-6 py-2.5 rounded-full font-bold uppercase text-sm tracking-wide hover:bg-orange-700 transition-all shadow-lg shadow-orange-200"
-                >
-                    {t.nav.quote}
-                </button>
+            {/* Fallback Branding if image is missing */}
+            <div className="fallback-logo hidden flex items-center gap-2">
+              <div className="bg-orange-600 text-white p-2 rounded-lg">
+                <GadaIcon className="w-6 h-6" />
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="text-2xl font-black tracking-tighter text-slate-900">BFW</span>
+                <span className="text-sm font-bold text-orange-600 tracking-wider uppercase">Fabrication</span>
+              </div>
             </div>
+          </div>
 
-            {/* Mobile Menu Toggle */}
-            <div className="flex items-center gap-4 md:hidden">
-                 <button 
-                    onClick={toggleLanguage}
-                    className="flex items-center gap-1 text-slate-600 font-bold"
-                >
-                    <Globe size={20} />
-                    <span>{language === 'en' ? 'GU' : 'EN'}</span>
-                </button>
-                <button 
-                    className="text-slate-800"
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                >
-                    {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-                </button>
-            </div>
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-8">
+            {['services', 'portfolio', 'testimonials', 'contact'].map((key) => (
+              <button
+                key={key}
+                onClick={() => scrollToSection(key)}
+                className="text-sm font-bold uppercase tracking-wide text-slate-600 hover:text-orange-600 transition-colors"
+              >
+                {t.nav[key as keyof typeof t.nav]}
+              </button>
+            ))}
+
+            {/* Language Switcher */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1 text-slate-600 hover:text-orange-600 transition-colors font-semibold"
+            >
+              <Globe size={18} />
+              <span>{language === 'en' ? 'GU' : 'EN'}</span>
+            </button>
+
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="bg-orange-600 text-white px-6 py-2.5 rounded-full font-bold uppercase text-sm tracking-wide hover:bg-orange-700 transition-all shadow-lg shadow-orange-200"
+            >
+              {t.nav.quote}
+            </button>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <div className="flex items-center gap-2 md:hidden">
+            {scrolled && (
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="bg-orange-600 text-white px-4 py-2 rounded-full font-bold uppercase text-[10px] tracking-wide animate-fadeIn"
+              >
+                {t.nav.contact}
+              </button>
+            )}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center justify-center w-10 h-10 text-slate-600 font-bold"
+            >
+              <Globe size={18} />
+            </button>
+            <button
+              className="text-slate-800 p-1"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-            <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-slate-200 p-4 flex flex-col gap-4 shadow-xl">
-                {['services', 'portfolio', 'testimonials', 'contact'].map((key) => (
-                    <button 
-                        key={key}
-                        onClick={() => scrollToSection(key)}
-                        className="text-left py-2 font-bold text-slate-700 border-b border-slate-100 last:border-0"
-                    >
-                        {t.nav[key as keyof typeof t.nav]}
-                    </button>
-                ))}
-            </div>
+          <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-slate-200 p-4 flex flex-col gap-4 shadow-xl">
+            {['services', 'portfolio', 'testimonials', 'contact'].map((key) => (
+              <button
+                key={key}
+                onClick={() => scrollToSection(key)}
+                className="text-left py-2 font-bold text-slate-700 border-b border-slate-100 last:border-0"
+              >
+                {t.nav[key as keyof typeof t.nav]}
+              </button>
+            ))}
+          </div>
         )}
       </nav>
 
       {/* Hero Section */}
       <header className="relative bg-slate-900 text-white py-24 md:py-32 overflow-hidden text-center md:text-left">
         <div className="absolute inset-0 z-0">
-             <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/90 to-slate-900/60 z-10"></div>
-             {/* Background Image Placeholder */}
-             <img 
-                src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80" 
-                alt="Welding Background" 
-                className="w-full h-full object-cover opacity-40"
-             />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/90 to-slate-900/60 z-10"></div>
+          {/* Background Image Placeholder */}
+          <img
+            src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80"
+            alt="Welding Background"
+            className="w-full h-full object-cover opacity-40"
+          />
         </div>
-        
+
         <div className="container mx-auto px-4 md:px-6 relative z-10">
-            <div className="max-w-3xl mx-auto md:mx-0">
-                <div className="flex justify-center md:justify-start mb-6">
-                    <div className="inline-flex items-center gap-2 bg-orange-600/20 border border-orange-500/30 rounded-full px-4 py-1.5 backdrop-blur-sm">
-                        <Shield className="w-4 h-4 text-orange-400 animate-pulse" />
-                        <span className="text-orange-300 text-xs font-bold uppercase tracking-wider">{t.hero.since}</span>
-                    </div>
-                </div>
-                <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6 whitespace-pre-line">
-                    {t.hero.title}
-                </h1>
-                <p className="text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed mx-auto md:mx-0">
-                    {t.hero.desc}
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <button 
-                        onClick={() => scrollToSection('contact')}
-                        className="bg-orange-600 text-white px-8 py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2 hover:bg-orange-700 transition-all shadow-lg shadow-orange-900/50"
-                    >
-                        <Phone size={20} />
-                        {t.hero.btn_visit}
-                    </button>
-                    <button 
-                        onClick={() => scrollToSection('portfolio')}
-                        className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2 hover:bg-white/20 transition-all"
-                    >
-                        {t.hero.btn_projects}
-                        <ArrowRight size={20} />
-                    </button>
-                </div>
+          <div className="max-w-3xl mx-auto md:mx-0">
+            <div className="flex justify-center md:justify-start mb-6">
+              <div className="inline-flex items-center gap-2 bg-orange-600/20 border border-orange-500/30 rounded-full px-4 py-1.5 backdrop-blur-sm">
+                <Shield className="w-4 h-4 text-orange-400 animate-pulse" />
+                <span className="text-orange-300 text-xs font-bold uppercase tracking-wider">{t.hero.since}</span>
+              </div>
             </div>
+            <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6 whitespace-pre-line">
+              {t.hero.title}
+            </h1>
+            <p className="text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed mx-auto md:mx-0">
+              {t.hero.desc}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="bg-orange-600 text-white px-8 py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2 hover:bg-orange-700 transition-all shadow-lg shadow-orange-900/50"
+              >
+                <Phone size={20} />
+                {t.hero.btn_visit}
+              </button>
+              <button
+                onClick={() => scrollToSection('portfolio')}
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2 hover:bg-white/20 transition-all"
+              >
+                {t.hero.btn_projects}
+                <ArrowRight size={20} />
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
       {/* Stats Section */}
       <section ref={statsRef} className="py-12 bg-slate-950 border-b border-slate-800">
         <div className="container mx-auto px-4 md:px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-                {metrics.map((metric) => (
-                    <AnimatedMetric 
-                        key={metric.id}
-                        {...metric}
-                        inView={statsInView}
-                    />
-                ))}
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+            {metrics.map((metric) => (
+              <AnimatedMetric
+                key={metric.id}
+                {...metric}
+                inView={statsInView}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Services Section */}
       <section id="services" className="py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-            <SectionTitle 
-                title={t.sections.expertise_title} 
-                subtitle={t.sections.expertise_sub} 
-            />
+          <SectionTitle
+            title={t.sections.expertise_title}
+            subtitle={t.sections.expertise_sub}
+          />
 
-            <div className="grid md:grid-cols-2 gap-12 mt-16">
-                {/* Builder Services */}
-                <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100">
-                    <div className="flex items-center gap-3 mb-8">
-                        <div className="p-3 bg-blue-100 text-blue-700 rounded-lg">
-                            <HardHat size={28} />
-                        </div>
-                        <div>
-                            <h3 className="text-2xl font-bold text-slate-900">{t.sections.builders_title}</h3>
-                            <p className="text-slate-500 text-sm font-medium uppercase tracking-wide">{t.sections.builders_sub}</p>
-                        </div>
-                    </div>
-                    <div className="space-y-6">
-                        {builderServices.map((service, idx) => (
-                            <div key={idx} className="flex gap-4 p-4 hover:bg-white rounded-xl transition-colors duration-300">
-                                <div className="mt-1 text-orange-600 bg-orange-50 p-2 rounded-lg h-fit">
-                                    {service.icon}
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-lg text-slate-800 mb-1">{service.title}</h4>
-                                    <p className="text-slate-600 leading-relaxed text-sm">{service.desc}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+          <div className="grid md:grid-cols-2 gap-12 mt-16">
+            {/* Builder Services */}
+            <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="p-3 bg-blue-100 text-blue-700 rounded-lg">
+                  <HardHat size={28} />
                 </div>
-
-                {/* Home Services */}
-                <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100">
-                     <div className="flex items-center gap-3 mb-8">
-                        <div className="p-3 bg-green-100 text-green-700 rounded-lg">
-                            <Home size={28} />
-                        </div>
-                        <div>
-                            <h3 className="text-2xl font-bold text-slate-900">{t.sections.home_title}</h3>
-                            <p className="text-slate-500 text-sm font-medium uppercase tracking-wide">{t.sections.home_sub}</p>
-                        </div>
-                    </div>
-                    <div className="grid sm:grid-cols-2 gap-4">
-                        {homeServices.map((service, idx) => (
-                            <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:border-orange-200 transition-colors">
-                                <h4 className="font-bold text-lg text-slate-800 mb-2">{service.title}</h4>
-                                <p className="text-slate-600 text-sm">{service.desc}</p>
-                            </div>
-                        ))}
-                        {/* Add extra card for CTA */}
-                         <div className="bg-orange-600 p-6 rounded-xl shadow-lg flex flex-col justify-center items-center text-center text-white">
-                            <h4 className="font-bold text-lg mb-2">{t.sections.custom_title}</h4>
-                            <p className="text-orange-100 text-sm mb-4">{t.sections.custom_desc}</p>
-                            <button onClick={() => scrollToSection('contact')} className="bg-white text-orange-600 px-4 py-2 rounded-lg text-sm font-bold hover:bg-orange-50 transition-colors">
-                                {t.sections.custom_btn}
-                            </button>
-                        </div>
-                    </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-900">{t.sections.builders_title}</h3>
+                  <p className="text-slate-500 text-sm font-medium uppercase tracking-wide">{t.sections.builders_sub}</p>
                 </div>
+              </div>
+              <div className="space-y-6">
+                {builderServices.map((service, idx) => (
+                  <div key={idx} className="flex gap-4 p-4 hover:bg-white rounded-xl transition-colors duration-300">
+                    <div className="mt-1 text-orange-600 bg-orange-50 p-2 rounded-lg h-fit">
+                      {service.icon}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-slate-800 mb-1">{service.title}</h4>
+                      <p className="text-slate-600 leading-relaxed text-sm">{service.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
+
+            {/* Home Services */}
+            <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="p-3 bg-green-100 text-green-700 rounded-lg">
+                  <Home size={28} />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-900">{t.sections.home_title}</h3>
+                  <p className="text-slate-500 text-sm font-medium uppercase tracking-wide">{t.sections.home_sub}</p>
+                </div>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {homeServices.map((service, idx) => (
+                  <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:border-orange-200 transition-colors">
+                    <h4 className="font-bold text-lg text-slate-800 mb-2">{service.title}</h4>
+                    <p className="text-slate-600 text-sm">{service.desc}</p>
+                  </div>
+                ))}
+                {/* Add extra card for CTA */}
+                <div className="bg-orange-600 p-6 rounded-xl shadow-lg flex flex-col justify-center items-center text-center text-white">
+                  <h4 className="font-bold text-lg mb-2">{t.sections.custom_title}</h4>
+                  <p className="text-orange-100 text-sm mb-4">{t.sections.custom_desc}</p>
+                  <button onClick={() => scrollToSection('contact')} className="bg-white text-orange-600 px-4 py-2 rounded-lg text-sm font-bold hover:bg-orange-50 transition-colors">
+                    {t.sections.custom_btn}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Portfolio Section */}
       <section id="portfolio" className="py-24 bg-slate-900 text-white">
         <div className="container mx-auto px-4 md:px-6">
-            <SectionTitle 
-                title={t.sections.projects_title} 
-                subtitle={t.sections.projects_sub} 
-                dark
-            />
+          <SectionTitle
+            title={t.sections.projects_title}
+            subtitle={t.sections.projects_sub}
+            dark
+          />
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-                {projects.map((project) => (
-                    <div 
-                        key={project.id}
-                        className="group relative bg-slate-800 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-transform duration-300"
-                        onClick={() => setActiveProject(project)}
-                    >
-                        <div className="aspect-[4/3] w-full overflow-hidden">
-                            <img 
-                                src={project.thumbnail} 
-                                alt={project.title} 
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
-                            {/* Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
-                            
-                            {/* Type Badge */}
-                            <div className="absolute top-4 left-4">
-                                <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
-                                    project.type === 'builder' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'
-                                }`}>
-                                    {project.type}
-                                </span>
-                            </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className="group relative bg-slate-800 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-transform duration-300"
+                onClick={() => setActiveProject(project)}
+              >
+                <div className="aspect-[4/3] w-full overflow-hidden">
+                  <img
+                    src={project.thumbnail}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
 
-                            {/* Media Count Badge */}
-                            <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1 text-xs font-bold">
-                                <Users size={12} className="opacity-0 w-0" />
-                                <span>{project.media.length}</span>
-                                <Maximize2 size={12} />
-                            </div>
-                        </div>
+                  {/* Type Badge */}
+                  <div className="absolute top-4 left-4">
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${project.type === 'builder' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'
+                      }`}>
+                      {project.type}
+                    </span>
+                  </div>
 
-                        <div className="absolute bottom-0 left-0 w-full p-6">
-                            <p className="text-orange-400 text-xs font-bold uppercase tracking-widest mb-1">
-                                {project.category}
-                            </p>
-                            <h3 className="text-xl font-bold text-white mb-1 group-hover:text-orange-400 transition-colors">
-                                {project.title}
-                            </h3>
-                            <div className="flex items-center gap-1 text-slate-400 text-sm">
-                                <MapPin size={14} />
-                                {project.location}
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+                  {/* Media Count Badge */}
+                  <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1 text-xs font-bold">
+                    <Users size={12} className="opacity-0 w-0" />
+                    <span>{project.media.length}</span>
+                    <Maximize2 size={12} />
+                  </div>
+                </div>
+
+                <div className="absolute bottom-0 left-0 w-full p-6">
+                  <p className="text-orange-400 text-xs font-bold uppercase tracking-widest mb-1">
+                    {project.category}
+                  </p>
+                  <h3 className="text-xl font-bold text-white mb-1 group-hover:text-orange-400 transition-colors">
+                    {project.title}
+                  </h3>
+                  <div className="flex items-center gap-1 text-slate-400 text-sm">
+                    <MapPin size={14} />
+                    {project.location}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section id="testimonials" className="py-24 bg-orange-50">
+      <section id="testimonials" ref={testimonialsRef} className="py-24 bg-orange-50">
         <div className="container mx-auto px-4 md:px-6">
-            <SectionTitle 
-                title={t.sections.testimonials_title} 
-                subtitle={t.sections.testimonials_sub} 
-            />
+          <SectionTitle
+            title={t.sections.testimonials_title}
+            subtitle={t.sections.testimonials_sub}
+          />
 
-            <div className="grid md:grid-cols-3 gap-8 mt-12">
-                {testimonials.map((t, i) => (
-                    <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-orange-100 flex flex-col">
-                        <div className="mb-6 text-orange-500">
-                             {[1,2,3,4,5].map(star => (
-                                 <span key={star} className="text-xl">★</span>
-                             ))}
-                        </div>
-                        <p className="text-slate-700 italic mb-6 flex-grow">"{t.text}"</p>
-                        <div className="flex items-center gap-4 border-t border-slate-100 pt-4">
-                            <div className={`w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border border-slate-100 shadow-sm text-sm font-black ${
-                              ['bg-orange-100 text-orange-700', 'bg-blue-100 text-blue-700', 'bg-green-100 text-green-700'][i % 3]
-                            }`}>
-                                {getInitials(t.name)}
-                            </div>
-                            <div>
-                                <h5 className="font-bold text-slate-900">{t.name}</h5>
-                                <p className="text-xs text-slate-500 uppercase font-medium">{t.role}</p>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
+            {testimonials.map((testimonial, i) => (
+              <TypingTestimonial
+                key={i}
+                testimonial={testimonial}
+                inView={testimonialsInView}
+                index={i}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
       {/* FAQ */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-             <SectionTitle 
-                title={t.sections.faq_title} 
-                subtitle={t.sections.faq_sub} 
-            />
-            
-            <div className="space-y-4 mt-12">
-                {faqs.map((faq, idx) => (
-                    <div key={idx} className="border border-slate-200 rounded-xl overflow-hidden hover:border-orange-300 transition-colors">
-                        <details className="group">
-                            <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 bg-slate-50 text-slate-800">
-                                <span>{faq.q}</span>
-                                <span className="transition group-open:rotate-180">
-                                    <ChevronDown />
-                                </span>
-                            </summary>
-                            <div className="text-slate-600 p-6 pt-0 bg-slate-50 border-t border-slate-100">
-                                {faq.a}
-                            </div>
-                        </details>
-                    </div>
-                ))}
-            </div>
+          <SectionTitle
+            title={t.sections.faq_title}
+            subtitle={t.sections.faq_sub}
+          />
+
+          <div className="space-y-4 mt-12">
+            {faqs.map((faq, idx) => (
+              <div key={idx} className="border border-slate-200 rounded-xl overflow-hidden hover:border-orange-300 transition-colors">
+                <details className="group">
+                  <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 bg-slate-50 text-slate-800">
+                    <span>{faq.q}</span>
+                    <span className="transition group-open:rotate-180">
+                      <ChevronDown />
+                    </span>
+                  </summary>
+                  <div className="text-slate-600 p-6 pt-0 bg-slate-50 border-t border-slate-100">
+                    {faq.a}
+                  </div>
+                </details>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Contact / Footer */}
       <footer id="contact" className="bg-slate-950 text-white pt-24 pb-8">
         <div className="container mx-auto px-4 md:px-6 mb-16">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
-                {/* Brand - LINE 628 */}
-                <div>
-                     <div className="flex items-center gap-2 mb-6">
-                        <img 
-  src={BRAND_LOGO_URL} 
-  alt="BFW Logo" 
-  className="w-28 md:w-36 h-auto object-contain brightness-0 invert" 
-  onError={(e) => {
-    e.currentTarget.style.display = 'none';
-    const fallback = e.currentTarget.parentElement?.querySelector('.fallback-footer-logo');
-    if (fallback) fallback.classList.remove('hidden');
-  }}
-/>
-                        <div className="fallback-footer-logo hidden flex items-center gap-2">
-                            <div className="bg-orange-600 text-white p-2 rounded-lg">
-                                <GadaIcon className="w-6 h-6" />
-                            </div>
-                            <div className="flex flex-col leading-none">
-                                <span className="text-xl font-black tracking-tighter text-white">BFW</span>
-                                <span className="text-sm font-bold text-orange-500 tracking-wider uppercase">Fabrication</span>
-                            </div>
-                        </div>
-                     </div>
-                     <p className="text-slate-400 leading-relaxed mb-6">
-                        {t.footer.desc}
-                     </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+            {/* Brand - LINE 628 */}
+            <div>
+              <div className="flex items-center gap-2 mb-6">
+                <img
+                  src={BRAND_LOGO_URL}
+                  alt="BFW Logo"
+                  className="w-28 md:w-36 h-auto object-contain brightness-0 invert"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    const fallback = e.currentTarget.parentElement?.querySelector('.fallback-footer-logo');
+                    if (fallback) fallback.classList.remove('hidden');
+                  }}
+                />
+                <div className="fallback-footer-logo hidden flex items-center gap-2">
+                  <div className="bg-orange-600 text-white p-2 rounded-lg">
+                    <GadaIcon className="w-6 h-6" />
+                  </div>
+                  <div className="flex flex-col leading-none">
+                    <span className="text-xl font-black tracking-tighter text-white">BFW</span>
+                    <span className="text-sm font-bold text-orange-500 tracking-wider uppercase">Fabrication</span>
+                  </div>
                 </div>
-
-                {/* Contact Info */}
-                <div className="lg:col-span-2">
-                    <h4 className="text-lg font-bold mb-6 text-white">{t.footer.contact_title}</h4>
-                    <div className="grid sm:grid-cols-2 gap-6">
-                         <div className="flex gap-4">
-                            <div className="mt-1">
-                                <MapPin className="text-orange-500" />
-                            </div>
-                            <div>
-                                <h5 className="font-bold text-white mb-1">{t.footer.address_title}</h5>
-                                <p className="text-slate-400 text-sm">
-                                    {t.footer.address}
-                                </p>
-                            </div>
-                         </div>
-                         <div className="space-y-4">
-                            <div className="flex items-start gap-4">
-                                <Phone className="text-orange-500 mt-1" />
-                                <div className="flex flex-col gap-1">
-                                    <p className="text-sm text-slate-400">{t.footer.call_label}</p>
-                                    <a href="tel:+919374126727" className="block font-bold text-lg hover:text-orange-400 transition-colors leading-tight">
-                                        +91 93741 26727
-                                    </a>
-                                    <a href="https://wa.me/918200460691" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-bold text-lg hover:text-green-500 transition-colors leading-tight">
-                                        <WhatsAppIcon className="w-5 h-5 text-green-500" />
-                                        <span>+91 82004 60691</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <Clock className="text-orange-500 mt-1" />
-                                <div>
-                                    <p className="text-sm text-slate-400">{t.footer.working_label}</p>
-                                    <p className="font-bold text-white">{t.footer.working_days}</p>
-                                    <p className="text-red-400 font-bold mt-1">{t.footer.closed_day}</p>
-                                </div>
-                            </div>
-                         </div>
-                    </div>
-                </div>
-
-                {/* Quick Links */}
-                <div>
-                    <h4 className="text-lg font-bold mb-6 text-white">{t.footer.links_title}</h4>
-                     <ul className="space-y-3">
-                        {t.footer.links.map((link: string, idx: number) => (
-                            <li key={idx}>
-                                <button onClick={() => scrollToSection(['services', 'portfolio', 'testimonials', 'contact'][idx-1] || 'home')} className="text-slate-400 hover:text-orange-500 transition-colors">
-                                    {link}
-                                </button>
-                            </li>
-                        ))}
-                     </ul>
-                </div>
+              </div>
+              <p className="text-slate-400 leading-relaxed mb-6">
+                {t.footer.desc}
+              </p>
             </div>
+
+            {/* Contact Info */}
+            <div className="lg:col-span-2">
+              <h4 className="text-lg font-bold mb-6 text-white">{t.footer.contact_title}</h4>
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div className="flex gap-4">
+                  <div className="mt-1">
+                    <MapPin className="text-orange-500" />
+                  </div>
+                  <div>
+                    <h5 className="font-bold text-white mb-1">{t.footer.address_title}</h5>
+                    <p className="text-slate-400 text-sm">
+                      {t.footer.address}
+                    </p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4">
+                    <Phone className="text-orange-500 mt-1" />
+                    <div className="flex flex-col gap-1">
+                      <p className="text-sm text-slate-400">{t.footer.call_label}</p>
+                      <a href="tel:+919374126727" className="block font-bold text-lg hover:text-orange-400 transition-colors leading-tight">
+                        +91 93741 26727
+                      </a>
+                      <a href="https://wa.me/918200460691" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-bold text-lg hover:text-green-500 transition-colors leading-tight">
+                        <WhatsAppIcon className="w-5 h-5 text-green-500" />
+                        <span>+91 82004 60691</span>
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <Clock className="text-orange-500 mt-1" />
+                    <div>
+                      <p className="text-sm text-slate-400">{t.footer.working_label}</p>
+                      <p className="font-bold text-white">{t.footer.working_days}</p>
+                      <p className="text-red-400 font-bold mt-1">{t.footer.closed_day}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-lg font-bold mb-6 text-white">{t.footer.links_title}</h4>
+              <ul className="space-y-3">
+                {t.footer.links.map((link: string, idx: number) => (
+                  <li key={idx}>
+                    <button onClick={() => scrollToSection(['services', 'portfolio', 'testimonials', 'contact'][idx - 1] || 'home')} className="text-slate-400 hover:text-orange-500 transition-colors">
+                      {link}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
 
         <div className="container mx-auto px-4 md:px-6 pt-8 border-t border-slate-900 text-center text-slate-500 text-sm">
-            <p>&copy; {new Date().getFullYear()} {t.footer.copyright}</p>
+          <p>&copy; {new Date().getFullYear()} {t.footer.copyright}</p>
         </div>
       </footer>
 
       {/* Project Modal */}
       {activeProject && (
-        <ProjectModal 
-            project={activeProject} 
-            onClose={() => setActiveProject(null)}
-            t={t.sections}
+        <ProjectModal
+          project={activeProject}
+          onClose={() => setActiveProject(null)}
+          t={t.sections}
         />
       )}
     </div>
