@@ -131,7 +131,7 @@ const TESTIMONIALS_EN: Testimonial[] = [
     text: "Quality of welding and finishing is superior. They passed our structural audit without a single remark."
   },
   { 
-    name: "Anjali Mehta", 
+    name: "Namrata Mehta", 
     role: "Home Owner", 
     text: "Beautiful gate design and very strong build quality. Highly recommended."
   },
